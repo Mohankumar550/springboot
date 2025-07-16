@@ -1,10 +1,19 @@
 package com.javabasedconfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Student {
 
     private int age;
     private String name;
 
+
+    //field Injection
+
+    @Autowired
+    @Qualifier("pen")
     private  Writer writer;
     
     public int getAge() {
