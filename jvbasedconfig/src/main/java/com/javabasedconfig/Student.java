@@ -12,8 +12,8 @@ public class Student {
 
     //field Injection
 
-    @Autowired
-    @Qualifier("pen")
+    // @Autowired
+    // @Qualifier("pen")  
     private  Writer writer;
     
     public int getAge() {
@@ -32,7 +32,10 @@ public class Student {
         this.name = name;
     }
 
+    // Setter Injection
 
+    @Autowired
+    @Qualifier("pen")
     public void setWriter(Writer writer) {
         this.writer = writer;
     }
