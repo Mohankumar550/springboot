@@ -34,7 +34,7 @@ public class StudentService {
 
     public Student getstudentsById(int rno) {
 
-        return studentsRepo.findById(rno).orElse(new Student());
+        return studentsRepo.findById(rno).orElse(null);
     }
 
     public String updatestudent(int id, Student entity) {
@@ -54,6 +54,14 @@ public class StudentService {
         studentsRepo.deleteAll();
 
         return  "deleted ALL";
+    }
+
+    public List<Student> getstudentsbyTechnology(String tech) {
+        return studentsRepo.findBytechnology(tech);
+    }
+
+    public List<Student> filtersstudent(String gender, String technology) {
+        return studentsRepo.findBygenderandtechnology(gender, technology);
     }
     
 }

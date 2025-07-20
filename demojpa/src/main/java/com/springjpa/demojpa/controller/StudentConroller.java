@@ -2,7 +2,12 @@ package com.springjpa.demojpa.controller;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,8 +45,14 @@ public class StudentConroller {
     }
 
     @GetMapping("/students/{rno}")
-    public Student getMethodName(@PathVariable("rno") int rno) {
-        return studentService.getstudentsById(rno);
+    public ResponseEntity<Student> getMethodName(@PathVariable("rno") int rno) {
+       Student st=studentService.getstudentsById(rno);
+       if (st==null){
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
+       else{
+        return  new ResponseEntity<>(st,HttpStatus.OK);
+       }
     }
 
     @PutMapping("students/{id}")
@@ -62,6 +73,19 @@ public class StudentConroller {
     public String deleteall(){
         return studentService.deleteallstudent();
     }
+
+    @GetMapping("students/technolgy/{tech}")
+    public List<Student> getstudentsbyTechnology(@PathVariable("tech") String tech) {
+        return studentService.getstudentsbyTechnology(tech);
+    }
+
+    @PostMapping("/students/filter")
+    public List<Student> filtervalue(@Param("gender") String gender ,@Param("technology") String technology) {
+        
+        return studentService.filtersstudent(gender,technology);
+    }
+    
+    
 
 
 
